@@ -4,7 +4,7 @@ h1. Introduction
 
 Il s'agit de présenter un concentré des 7 (sept) informations les plus importante de chaque article de Wikipédia. Ces informations sont choisies et triés par la communauté.
 
-h1. Principe
+h1. Principes
 
 * *L'objectif* du projet est d'offrir une version très compacte et extrêment pertinente d'un wikipedia de plus en plus tentaculaire.
 * Les utilisateurs y *contribuent* par la sélection et l'insertion des informations jugées les plus essentielles et de les trier.
@@ -29,19 +29,15 @@ h1. Techniquement
 
 h1. Foire aux Questions
 
-h1. TODO 
-
-h2. Tests
-
-* Ecrire des tests pour le routage, simple mais qd même
+Section à remplir.
 
 
-
-h1. Sous projets 
+h1. Futurs sous-projets 
 
 * Version mobile du site
 * Applications mobiles (iOS, Android, Windows Phone, BlackBerry)
-* 
+* Extensions pour tous les navigateurs populaires (IE, Firefox, Chrome, Opera...) : permet de prévenir l'utilisateur qu'il existe une fiche Wikibref de ce qu'il consulte sur wikipedia. Voir carrément d'y afficher les 7 informations dans un encart intrusif. 
+
 
 h1. License
 
