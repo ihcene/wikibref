@@ -83,7 +83,6 @@ GEM
       rdoc (~> 3.4)
       thor (~> 0.14.6)
     rake (0.9.2.2)
-    rb-fsevent (0.9.1)
     rdoc (3.12)
       json (~> 1.4)
     sass (3.1.15)
@@ -117,7 +116,6 @@ DEPENDENCIES
   jquery-rails
   minitest-rails
   rails (= 3.2.3)
-  rb-fsevent
   sass-rails (~> 3.2.3)
   sqlite3
   uglifier (>= 1.0.3)

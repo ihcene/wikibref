@@ -24,7 +24,6 @@ group :test, :development do
   gem 'guard'
   gem 'minitest-rails'
   gem "growl"
-  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   
   gem 'guard-minitest'
 end
