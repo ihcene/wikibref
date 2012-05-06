@@ -6,6 +6,7 @@ gem 'rails', '3.2.3'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
+gem 'activerecord-postgresql-adapter'
 
 
 # Gems used only for assets and not required
@@ -24,6 +25,7 @@ group :test, :development do
   gem 'guard'
   gem 'minitest-rails'
   gem "growl"
+  # gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   
   gem 'guard-minitest'
 end
