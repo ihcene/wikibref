@@ -1,0 +1,15 @@
+<div class="subform">
+  <%- unless information.new_record? -%>
+    <a href="#" class="close">[Fermer]</a>
+  <%- end -%>
+
+  <%= f.fields_for :informations, information do |f_i| %>
+    <%= f_i.hidden_field :score, options(information, position) %>
+    <div><%= f_i.text_area :content, :placeholder => "[Entrez ici une information courte et pertinente]" %></div>
+    <div>
+      <%= f_i.text_field :link_for_details, :placeholder => "Lien vers la section de l'article Wikipédia original ou vers un article dédié" %>
+    </div>
+  <% end %>
+
+  <div><%= f.submit %></div>
+</div>

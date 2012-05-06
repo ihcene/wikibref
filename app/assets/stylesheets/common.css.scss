@@ -1,0 +1,17 @@
+@import 'forms';
+
+$links_color: #EC3C00;
+
+a{
+	color: #4096EE;
+	text-decoration: none;
+	
+	&:hover{
+		color: $links_color;
+	}
+}
+
+.single-by-line{
+	clear: both;
+	text-align: center;
+}

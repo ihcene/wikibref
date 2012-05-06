@@ -1,14 +1,75 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Wikibref</title>
+  <title><%= yield(:title).or "L'Encyclopédie résumée" -%> \  Wikibref</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
+<div id="page">
+  <header>
+    <h1>
+      <%= link_to root_path do %>
+        <span>&larr; Retour à l'accueil</span>
+        <%= image_tag asset_path('common/logo.png'), :alt => "Utoupie.com, le logo" %>
+      <% end %>
+    </h1>
+  
+    <h2>Menu principal</h2>
+  
+      <ul>
+        <li><%= link_to "+ Nouvel article", new_article_path %></li>
+      </ul>
+    
+    <h2>Moteur de recherche</h2>
+  
+      <%= form_for Search.new(params[:search]), :url => search_path, :html => {:method => :get, :id => "search"} do |f| -%>
+    
+        <div>
+          <div class="why-not">
+            Pourquoi pas ? <span>Pink Floyd, Glaces</span>
+          </div>
+          <%= f.text_field :keywords %>
+          <input type="image" src="<%= image_path('common/search/icon.png') %>" value="Trouver &rarr;" />
+          <div class="advanced-link"><a href="/search/advanced">Recherche avancée</a></div>
+          <div class="gradient"></div>
+        </div>
+
+      <% end -%>
+
+    <h2>Compte utilisateur</h2>
+  
+      <div id="login" class="styled">
+        <%= render "/layouts/logged_" + user_logged?.to_s %>
+      </div>
+  
+    <h2>Messages</h2>
+    
+    <ol id="notices">
+    <% for name in [:notice, :alert] %>
+      <% if flash[name] %>
+        <li class="<%= name %> closable">
+          <div>
+            <h3><%= name.capitalize %></h3>
+            <%= flash[name] %>
+          </div>
+          <a href="#close" class="close"><%= image_tag 'common/close.png' %></a>
+        </li>
+      <% end -%>
+    <% end -%>
+    </ol>
+  </header>
+  
+  <div id="content">
 <%= yield %>
+  </div>
+  
+  <footer>
+    WikiBref est un <a href="https://github.com/Idelways/wikibref">logiciel libre</a> disponible sous <a href="http://www.gnu.org/licenses/gpl.html">licence GPLv3</a> et maintenu par <a href="http://www.facebook.com/RayidTR">Rayid Tayeb-Rahmani</a>.
+  </footer>
+</div>
 
 </body>
 </html>

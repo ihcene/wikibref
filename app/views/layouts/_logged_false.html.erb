@@ -1,0 +1,23 @@
+<%= link_to "S'identifier", login_user_path, :class => "js"  %>
+
+<%= form_for Author.new, :url => login_user_path do |f| -%>
+  <div>
+    <h3>Identification...</h3>
+    
+    <div>
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+    </div>
+    
+    <div>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+    </div>
+
+    <div class="single-by-line">
+      <%= f.submit "Se connecter" %>
+    </div>
+  </div>
+  
+  <a href="#close" class="js"><%= image_tag 'common/close.png' %></a>
+<% end -%>

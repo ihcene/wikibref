@@ -1,0 +1,91 @@
+label{
+	cursor: pointer;
+}
+
+.styled	form{
+	&>p{
+		clear: both;
+	}
+	
+	.field_with_errors{
+		display: inline;
+		color: red;
+	}
+	
+	p.small{
+		input{
+			width: 150px;
+		}
+	}
+	
+	label{
+		float: left;
+		
+		padding-right: 10px;
+		text-align: right;
+		&:after{
+			content: (' :');
+		}
+		width: 150px;
+	}
+	
+	.retrait{
+		padding-left: 160px;
+	}
+
+	input[type=submit]{
+		@include button;
+		
+		cursor: pointer;
+	}
+
+	input[type=text], input[type=password], select, textarea{
+		$retrait: 20px;
+
+		padding: 5px;
+		border: none;
+
+		@include border-radius(3px);
+		@include linear-gradient(top, #f2f3f1, #f4f4f4, #ffffff);
+		@include box-shadow(0px 2px 2px #BBBBBB, inset 0px 3px 3px #CCCCCC);
+
+		width: 300px;
+		
+		&:focus, &:hover{
+			@include box-shadow(0px 2px 2px #84c40a, inset 0px 3px 3px #CCCCCC);
+		}
+
+		option.depth-0{
+			border:{
+				top: 2px solid #A0B0CB;
+				right: 2px solid #A0B0CB;
+			};
+			@include linear-gradient(left, #A0B0CB, #A0B0CB * 3, #fff);
+		}
+
+		option.depth-1{
+			padding-left: $retrait;
+		}
+
+			option.depth-2{
+				padding-left: $retrait * 2;
+			}
+
+				option.depth-3{
+					padding-left: $retrait * 3; 
+				}
+
+					option.depth-4{
+						padding-left: $retrait * 4;
+					}
+
+						option.depth-5{
+							padding-left: $retrait * 5;
+						}
+	}
+	
+	p.submit{
+		text-align: center;
+		clear: both;
+	}
+}

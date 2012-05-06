@@ -1,0 +1,26 @@
+<h1>
+  <%= title('Nouvel article') %>
+</h1>
+
+<div class="styled">
+  <%= form_for @article do |f| %>
+    <% if @article.errors.any? -%>
+      <div class="field_with_errors">  
+        <%= @article.errors.full_messages.to_sentence %>
+      </div>
+      <hr />
+    <% end %>
+
+    <div>
+      <%= f.label :url %> <%= f.text_field :url %>
+    </div>
+    
+    <div class="retrait">
+      <small>L'URL d'un article Wikipedia, n'importe lequel.</small>
+    </div>
+    
+    <p class="retrait">
+      <%= f.submit "Créer l'article WikiBref!" %>
+    </p>
+  <% end %>
+</div>

@@ -1,0 +1,67 @@
+<div class="title">
+  <h1><%= title("[Édition] " + @article.title) %></h1>
+</div>
+
+<div class="styled">
+  <%= form_for @article do |f| %>
+  <p class="information main">
+    <%= f.fields_for :main_information, (@article.main_information || Information.new) do |subform| %>
+      <%= subform.text_area :content, :placeholder => "Entrez-ici une définition courte qui introduit au mieux le sujet en question" %>
+    <% end %>
+    
+    <div class="single-by-line"><%= f.submit %></div>
+  </p>
+
+  <p class="illustration">
+    <img src="http://upload.wikimedia.org/wikipedia/commons/b/be/PinkFloyd1973_retouched.jpg" alt="Article illustration" />
+  </p>
+
+  <hr />
+
+  <ol class="sortable">
+    <% @article.informations.complete(APP_CONFIG['count_info']).each_with_index do |information, i| %>
+      <%= content_tag(:li, :class => information.nil? ? "no_content" : "has_content", :data => {:id => information.try(:id) || "", :initposition => i + 1 } ) do %>
+        <% if information.nil? %>
+            <% if form_already_showed? %>
+              <p><small>[Pas encore d'information ici]</small></p>
+            <% else %>
+              <%= render :partial => 'form_information', :locals => {:f => f, :information => @article.informations.new, :position => i + 1 } %>
+            <% end %>
+        <% else %>
+          <div class="content">
+            <%= link_to ">", information.link_for_details, :class => "link_for_details" unless information.link_for_details.blank? %>
+            <span class="tools">
+              <%= link_to edit_article_information_url(@article, information), :class => "edit" do %>
+                <%= image_tag asset_path('icons/edit.png') %>
+              <% end -%>
+              <%= link_to article_information_url(@article, information), :remote => true, :method => :delete, :class => "delete", :confirm => "Êtes-vous sûrs de vouloir supprimer cette information ?" do %>
+                <%= image_tag asset_path('icons/delete.png') %>
+              <% end -%>
+            </span>
+            <%= raw bold_keywords(information.content) %>
+          </div>
+          <%= render :partial => 'form_information', :locals => {:f => f, :information => information, :position => nil } %>
+        <% end %>
+      <%- end -%>
+    <%- end -%>
+  
+    <div class="reorder tools">
+      <%= link_to "#" do %>
+        Enregistrer l'ordre<br />
+        <%= image_tag asset_path('icons/re-order.png') %>
+      <% end %>
+    </div>
+    <p class="links other_informations">
+      <%= link_to "+ Plus d'informations" %>
+    </p>
+  <% end #form %>
+
+  <%- if @article.informations.count {|e| !e.nil? } >= APP_CONFIG['count_info'] -%>
+    <li class="no_content">
+      <%= form_for @article do |f| %>
+        <%= render :partial => 'form_information', :locals => {:f => f, :information => @article.informations.new, :position => nil } %>
+      <%- end -%>    
+    </li>
+  <% end %>
+  </ol>
+</div>

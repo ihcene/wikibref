@@ -1,13 +1,13 @@
 h1. Introduction
 
-"_WikiBref est un projet ouvert et collaborative d'encyclopédie résumée de Wikipédia. Ses articles sont fait d'informations courtes et pertinentes._"
+"_WikiBref est un projet ouvert et collaboratif d'encyclopédie résumée de Wikipédia. Ses articles sont fait d'informations courtes et pertinentes._"
 
 Il s'agit de présenter un concentré des 7 (sept) informations les plus importante de chaque article de Wikipédia. Ces informations sont choisies et triés par la communauté.
 
 h1. Principes
 
 * *L'objectif* du projet est d'offrir une version très compacte et extrêment pertinente d'un wikipedia de plus en plus tentaculaire.
-* Les utilisateurs y *contribuent* par la sélection et l'insertion des informations jugées les plus essentielles et de les trier.
+* Les utilisateurs y *contribuent* par la sélection, l'insertion et le trie des informations jugées les plus essentielles.
 * Le projet n'admet aucune *source* d'information autre que Wikipedia. Ses contributeurs se débarassent donc de toute responsabilité de vérification des sources.
 * Wikibref est un projet *indépendant* qui nourit l'espoir d'intégrer la famille des produits WikiMedia.
 * La *première information* d'un article est fixe. Elle l'introduit en définissant précisément de quoi il parle.
@@ -15,7 +15,7 @@ h1. Principes
 * Toute information ne peut *pointer* que vers une seule section de l'article Wikipedia original ou vers un autre article cible cité en lien dans l'article wikipedia original (à confirmer).
 
 * Le projet est réalisé avec le framework *RubyOnRails* mais devrait être traduit en PHP dans la perspective d'intégrer la famille des produits WikiMedia.
-* Un article Wikibref affiche seulement les *7 informations* (6 + introduction) les mieux placés par les utilisateurs. Les autres demeurent consultables par un clic.
+* Un article Wikibref affiche seulement les *7 informations* les mieux placés par les utilisateurs. Les autres demeurent consultables par un clic.
 * Un article ne peut contenir qu'une seule *image*, qui correspond à l'illustration principale de l'article Wikipedia.
 * Le projet est disponible dans toutes les *langues* offertes par Wikipedia.
 * La seule mise en page autorisé dans les informations est une mise en gras d'au maximum *deux mots* voisins. Ces mots clés permetteront aux utilisateurs de balayer encore plus rapidement les informations.
@@ -34,9 +34,11 @@ Section à remplir.
 
 h1. Futurs sous-projets 
 
-* Version mobile du site
-* Applications mobiles (iOS, Android, Windows Phone, BlackBerry)
+* Version mobile du site.
+* Applications mobiles (iOS, Android, Windows Phone, BlackBerry).
 * Extensions pour tous les navigateurs populaires (IE, Firefox, Chrome, Opera...) : permet de prévenir l'utilisateur qu'il existe une fiche Wikibref de ce qu'il consulte sur wikipedia. Voir carrément d'y afficher les 7 informations dans un encart intrusif. 
+* Module d'exportation des données.
+* Module d'internationalisation.
 
 
 h1. License

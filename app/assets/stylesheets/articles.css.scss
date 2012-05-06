@@ -1,3 +1,263 @@
-// Place all the styles related to the articles controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bourbon";
+
+.title{
+	display: table;
+	width: 100%;
+	
+	h1, .links{
+		display: table-cell;	
+	}
+	
+	h1{
+		width: 60%;
+	}
+	
+	.links{
+		text-align: right;
+		width: 40%;
+		vertical-align: top;
+	}
+}
+
+.links{
+	text-align: center;
+	
+	a{
+		text-decoration: none;
+		@include button;
+		
+		&.edit{
+			@include button(red);
+		}
+	}
+}
+
+.information.main{
+	font-size: 130%;
+}
+
+.illustration{
+	text-align: center;
+	
+	img{
+		max-width: 300px;
+		max-height: 200px;
+		
+		@include border-radius(6px);
+		
+		&:hover{
+			max-width: 100%;
+			max-height: 100%;
+		}
+	}
+}
+
+.reorder{
+	text-align: center;
+	
+	position: fixed;
+	top: 0;
+	left: 990px;
+	background-color: white;
+	
+	display: none;
+	
+	width: 100px;
+	
+	font:{
+		size: 80%;
+		weight: bold;
+	}
+	padding: 5px;
+	
+	@include box-shadow(0 0 15px rgba(0, 0, 0, 0.34));
+	@include border-radius(0px 0px 10px 10px);
+	
+	background-image: image-url('common/flash-bg.gif');
+	
+	a{
+		text-decoration: none;
+		color: black;
+		
+		&:hover{
+			padding-top: 30px;
+		}
+		
+		img{
+			margin-top: 10px;
+		}
+	}
+}
+
+.tools a img{
+	/* Use sass's unquote function to outpass the opacity function */
+	-webkit-filter: blur(2px) unquote("opacity(.3)");
+	
+	&:hover{
+		-webkit-filter: blur(0) unquote("opacity(1)");
+	}
+}
+
+#content{
+	form{
+		textarea{
+			width: 920px;
+			height: 80px;
+		
+			font-family: $georgia;
+		
+			font-size: 16px;
+		}
+	}
+}
+
+#content ol{
+	margin-left: 15px;
+	
+	&.sortable{
+		li{
+			.content{
+				cursor: move;	
+				
+				padding-left: 0px;
+				padding-right: 30px;
+				@include transition(padding-left 2.0s);
+
+				&:hover{
+					padding-left: 85px;
+
+					.tools{
+						display: block;
+						position: absolute;
+
+						@include transition(opacity 2.0s);
+						opacity: 1;
+
+						a{
+							text-decoration: none;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	li{
+		vertical-align: top;
+		font-size: 200%;
+		font-style: italic;
+		color: #E1E1E1;
+
+		@include transition (color 2.0s);
+		
+		&:hover{
+			color: #ff0000;
+		}
+	
+		.content{
+			position: relative;
+			
+			font-size: 50%;
+			font-style: normal;
+			color: black;
+			
+			height: 70px;
+			
+			a.link_for_details{
+				display: block;
+				position: absolute;
+				text-decoration: none;
+				color: #6CF;
+				
+				@include transition(color 2.0s);
+				
+				top: 0;
+				right: 0;
+				
+				font-size: 36px;
+				font-weight: bold;
+				
+				&:hover{
+					color: red;
+					@include transition(color 2.0s);
+				}
+			}
+			
+			
+			&.nil{	
+				color: #E1E1E1;
+			}
+			
+			.tools{
+				display: block;
+				position: absolute;
+				left: 0;
+				top: 12px;
+				
+				@include transition(opacity 2.0s);
+				opacity: 0;
+			}
+		}
+		
+		&.sortable-placeholder {
+			border: 1px dashed #CCC;
+			background-image: image-url('common/flash-bg.gif');
+			background: none;
+		}
+		
+		.subform{
+			.close{
+				font-style: normal;
+				font-size: 50%;
+				text-decoration: none;
+			}
+			
+			padding: 20px;	
+			
+			textarea{
+				width: 99%;
+				height: 80px;
+				
+				font-family: $georgia;
+				
+				font-size: 16px;
+			}
+		}
+		
+		&.has_content{	
+			.subform{
+				display: none;
+
+				border: 1px dashed #CCC;
+				
+				@include border-radius(5px);
+				
+				background-image: image-url('common/flash-bg.gif');
+			}
+			
+			/* Hide the informations badly classified */
+			&:nth-child(n+8){
+				display: none;
+				font-size: 160%;
+				
+				.content{
+					height: 50px;
+					color: lighten(black, 70%);
+				}
+				
+				.tools{
+					width: 55px;
+					
+					img{
+						width: 25px;	
+					}
+				}
+			}
+
+			/* Aesthetic border */
+			&:nth-child(7){
+				border-bottom: 1px solid #E1E1E1;
+			}
+		}
+	}
+}

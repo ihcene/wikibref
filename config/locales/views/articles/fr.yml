@@ -1,0 +1,5 @@
+fr:
+  update:
+    article_successfully_edited: "Article édité avec succès"
+  create:
+    errors: "Des erreurs se sont glissés dans votre formulaire"

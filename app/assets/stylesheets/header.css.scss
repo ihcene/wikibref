@@ -1,0 +1,324 @@
+@import "bourbon";
+
+$defaultradius : 15px;
+
+header{
+	position: relative;
+	height: 200px;
+	z-index: 2;
+	padding-top: 1px;
+	
+	width: 960px;
+	margin: 0 auto;
+	
+	font-size: 60%;
+	
+	*{
+		margin: 0;
+		padding: 0;
+		border: none;
+		list-style: none;
+	}
+	
+	a{
+		color: black;
+	}
+	
+	h1 {
+		position: absolute;
+		right: 25px;
+		
+		a {
+			position: relative;
+			
+			&:hover {
+				img{
+					opacity: .3;	
+				}
+				
+				span {
+					display: block;
+				}
+			}
+			
+			span {
+				display: none;
+				position: absolute;
+		
+				top: -80px;
+				left: 60px;
+				
+				font-size: 80%;
+				font-weight: bold;
+				padding: 5px;
+				line-height: 100%;
+				
+				-moz-border-radius: 10px;
+				-webkit-border-radius: 10px;
+				border-radius: 10px;
+				
+				background-color: black;
+				color: white;
+			}
+		}
+	}
+	
+	h2 {
+		/* Accessibilité seulement */
+		display: none;
+	}
+	
+	#login{
+		position: absolute;
+		z-index: 4;
+		top: -1px;
+		left: 0px;
+		
+		font-family: $verdana;
+	
+		&>a{
+			background:{
+				image: image-url('users/login-button.png');
+				position: 0 100%;
+			};
+		
+			position: absolute;
+			display: block;
+			
+			left: 45px;
+			width: 90px;
+			
+			height: 39px;
+				line-height: 35px;
+			
+			padding:{
+				left: 55px;
+				right: 20px;
+			}
+			
+			text-align: center;
+		
+			font:{
+				weight: bold;
+				size: 120%;
+				family: $verdana;
+			}
+			
+			text-decoration: none;
+		}
+		
+		h3{
+			margin-top: 10px;
+			margin-bottom: 15px;
+			font-size: 130%;
+		}
+	
+		form{
+			display: none;
+		
+			&>div{
+				padding: 10px;
+			
+				div{
+					padding-bottom: 5px;
+					clear: both;
+				}
+			}
+		
+			a{
+				position: absolute;
+				bottom: -20px;
+				right: -15px;
+			}
+		
+			label{
+				width: 100px;
+				font-size: 110%;
+				&:after{
+					content: none;
+				};
+			}
+		
+			input[type=text], input[type=password]{
+				width: 160px;
+			}
+		
+			position: absolute;
+			left: 300px;
+			width: 350px;
+		
+			background-image: image-url('users/login-corner-icon.png'), -moz-linear-gradient(top,  #f2f3f1,  #f4f4f4, transparentize(#ffffff, .2));
+			background-image: image-url('users/login-corner-icon.png'), -webkit-linear-gradient(top,  #f2f3f1,  #f4f4f4, transparentize(#ffffff, .2));
+		
+			background-position: 100% 0%;
+			background-repeat: no-repeat;
+		
+			
+			
+			@include box-shadow(0px 0px 15px #BBBBBB);
+			
+			@include border-radius($defaultradius / 2);
+		}
+	}
+
+	ol{
+		position: fixed;
+		z-index: 5;
+		top: -1px;
+		
+		left: 50%;
+	  margin-left: -180px;
+	
+		li.alert{
+			div{
+				background-image: image-url('common/flash/alert.png'), -moz-linear-gradient(top,  #f2f3f1,  #f4f4f4, transparentize(#ffffff, .1));
+				background-image: image-url('common/flash/alert.png'), -webkit-linear-gradient(top,  #f2f3f1,  #f4f4f4, transparentize(#ffffff, .1));
+			}
+		}
+
+		li.notice{
+			div{
+				background-image: image-url('common/flash/notice.png'), -moz-linear-gradient(top,  #f2f3f1,  #f4f4f4, transparentize(#ffffff, .1));
+				background-image: image-url('common/flash/notice.png'), -webkit-linear-gradient(top,  #f2f3f1,  #f4f4f4, transparentize(#ffffff, .1));
+			}
+		}
+	
+		li{
+			position: absolute;
+			width: 350px;
+			
+			top: -300px;
+			padding: 0 15px 25px 0;
+
+			&>a{
+				position: absolute;
+				bottom: 0px;
+				right: 0px;
+			}
+		
+			div{
+			
+				h3{
+					text-decoration: underline;
+				}
+				
+				min-height: 150px;
+			
+				padding: 10px;
+				padding-top: 40px;
+			
+				background-position: 100% 0%;
+				background-repeat: no-repeat;
+			
+				font-size: 170%;
+
+				box-shadow: 0px 0px 15px #BBBBBB;
+				
+				@include border-radius($defaultradius / 2)
+			}
+		}
+	}
+	
+	ul{
+		position: absolute;
+		
+		top: 170px;
+		left: $defaultradius / 2;
+		
+		li{
+			float: left;
+			
+			a{
+				@include button;
+				
+				&:hover{
+					color: white;
+				}
+			}
+		}
+	}
+
+	form#search{
+		position: absolute;
+		top: 55px;
+		left: 320px;
+		background-image: image-url('common/search/field.png');
+		background-repeat: no-repeat;
+		background-position: 0px 20px;
+		width: 320px;
+		height: 80px;
+		color: #776262;
+		
+		font-family: $verdana;
+	
+		.why-not{
+			font-weight: bold;
+			padding-left: 3px;
+			line-height: 23px;
+	
+			span{
+				font-weight: normal;
+				padding-left: 5px;
+			}
+	
+			span:after{
+				content: (' ...');
+			}
+		}
+	
+		input[type=image]{
+			position: absolute;
+			right: 0px;
+			top: 18px;
+		}
+
+		input[type=text]{
+			margin:{
+				left: 10px;
+				top: 2px;
+			};
+		
+			width: 260px;
+			height: 36px;
+			font-size: 160%;
+		
+			background:{
+				color: transparent;
+			}
+		 
+			color: #776262;
+		}
+	
+		.gradient{
+			position: absolute;
+		
+			z-index: 4;
+		
+			right: 50px;
+			top: 28px;
+		
+			height: 33px;
+			width: 33px;
+		
+			background:{
+				image: image-url('common/search/gradient.png');
+				position: 100% 0%;
+				repeat: no-repeat;
+			}
+		}
+	
+		.advanced-link {
+			text-align: right;
+			padding-right: 40px;
+			line-height: 23px;
+		
+			a {
+				color: #776262;
+			}
+		}
+	}
+
+	form>div {
+		position: relative;
+	}
+}

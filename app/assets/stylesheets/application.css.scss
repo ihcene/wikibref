@@ -1,0 +1,67 @@
+@import "bourbon";
+@import "common";
+
+@import "articles";
+@import "header";
+
+body{
+	margin: 0;
+	padding: 0;
+	padding-bottom: 20px;
+	
+	font-family: 'Gentium Book Basic', "PT Serif", Georgia, Times, "Times New Roman", serif;
+	
+	background:{
+		image: image-url('common/background-gradient.jpg');
+		repeat: repeat-x;
+	}
+	
+	min-width: 960px;
+	
+	#page{
+		
+  	background:{
+  		image: image-url('common/background-sky.png');
+  		repeat: no-repeat;
+  		position: 50% 0;
+  	}
+
+		min-height: 960px;
+		
+		#content{
+			width: 930px;
+			margin: 0 auto;
+			
+			padding: 15px;
+			
+			background-color: white;
+			
+			@include border-radius(10px);
+			@include box-shadow(0 0 15px #BBBBBB);
+		}
+		
+		footer{
+			width: 930px;
+			margin: 0 auto;
+			
+			font-family: $verdana;
+			font-size: 70%;
+			font-weight: bold;
+			
+			line-height: 30px;
+			
+			text-align: right;
+
+			color: lighten(black, 70%);
+			
+			a{
+				color: lighten(#4096EE, 20%);
+				
+				&:hover{
+					color: lighten(#EC3C00, 20%);
+				}
+			}
+		}
+	}
+}
+

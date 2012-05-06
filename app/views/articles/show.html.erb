@@ -1,0 +1,38 @@
+<div class="title">
+  <h1><%= title(@article.title) %></h1>
+
+  <p class="links">
+    <%= link_to "Modifier", edit_article_path(@article), :class => "edit" %>
+    <%= link_to "Article détaillé sur Wikipédia &rarr;".html_safe, @article.url_original %>
+  </p>
+</div>
+
+<div>
+  <p class="information main"><%= raw bold_keywords(@article.main_information.try(:content)) %></p>
+
+  <p class="illustration">
+    <img src="http://upload.wikimedia.org/wikipedia/commons/b/be/PinkFloyd1973_retouched.jpg" alt="Article illustration" />
+  </p>
+
+  <hr />
+
+  <ol>
+    <% @article.informations.complete(APP_CONFIG['count_info']).each_with_index do |information, i| %>
+      <%= content_tag(:li, :class => information.nil? ? "no_content" : "has_content", :data => {:id => information.try(:id) || "", :initposition => i + 1 } ) do %>
+        <% if information.nil? %>
+          <p><small>[Pas encore d'information ici]</small></p>
+        <% else %>
+          <div class="content">
+            <%= link_to ">", information.link_for_details, :class => "link_for_details" unless information.link_for_details.blank? %>
+            <%= raw bold_keywords(information.content) %>
+          </div>
+        <% end %>
+      <%- end -%>
+    <%- end -%>
+  
+    <p class="links other_informations">
+      <%= link_to "+ Plus d'informations" %>
+    </p>
+
+  </ol>
+</div>
