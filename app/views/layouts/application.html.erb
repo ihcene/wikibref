@@ -29,11 +29,11 @@
     
         <div>
           <div class="why-not">
-            Pourquoi pas ? <span>Pink Floyd, Glaces</span>
+            Pourquoi pas ? <span><%= link_to 'Pink Floyd', wiki_like_path(:slug => 'Pink_Floyd') %>, <%= link_to 'Wikibref', wiki_like_path(:slug => 'Wikibref') %></span>
           </div>
           <%= f.text_field :keywords %>
           <input type="image" src="<%= image_path('common/search/icon.png') %>" value="Trouver &rarr;" />
-          <div class="advanced-link"><a href="/search/advanced">Recherche avancée</a></div>
+          <div class="advanced-link"><a href="#">Recherche avancée</a></div>
           <div class="gradient"></div>
         </div>
 
