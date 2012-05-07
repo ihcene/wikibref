@@ -16,7 +16,7 @@ class Article < ActiveRecord::Base
   attr_accessible :url, :informations_attributes, :main_information, :main_information_attributes
   
   validates_format_of :url, :with => WikiExistenceValidator::VALID_WIKIPEDIA_LINK, :on => :create
-  validates_with WikiExistenceValidator, :on => :create
+  validates_with WikiExistenceValidator, :on => :create, :if => proc {|a| a['title'] != 'Wikibref'}
   
   validates_uniqueness_of :title, :scope => :lang_code
   
