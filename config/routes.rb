@@ -7,7 +7,7 @@ Wikibref::Application.routes.draw do
     resources :informations
   end
 
-  root :to => 'articles#show', :slug => 'Pink_Floyd'
+  root :to => 'articles#show', :slug => 'Wikibref'
   
   post 'users/login' => 'users#login', :as => 'login_user'
 end
