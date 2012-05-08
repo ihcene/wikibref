@@ -24,12 +24,16 @@ h1. Principes
 
 h1. Techniquement
 
-* L'édition, réagencements des fiches se font in-situ via HTML5 / jQuery
+* Le projet est développé en Ruby on Rails version 3.1.2. Il utilise SASS (un compilateur CSS) avec la bibliothèque Bourdon, mais pas de CoffeeScript.
+* Base de données : SQLite en développement et PostgreSQL en production.
+* L'édition, réagencements des fiches se font in-situ via HTML5 / jQuery (le plugin HTML5Sortable).
 
 
 h1. Foire aux Questions
 
-Section à remplir.
+h2. WikiBref est un Mashup (application composite) de Wikipedia, c'est bien ça ?
+
+Pas du tout ! WikiBref ne fait aucune extraction automatisée à partir de Wikipedia. La valeur du projet est justement la pertinence de la sélection, l'adaptation et le trie des informations. Une tâche qui ne peut être aussi bien faite par une machine.
 
 
 h1. Futurs sous-projets 

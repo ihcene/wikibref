@@ -34,7 +34,7 @@ class ArticlesController < ApplicationController
     @article.update_attributes params[:article]
     
     flash[:notice] = t(".update.article_successfully_edited");
-    redirect_to wiki_like_path(:slug => @article.slug)
+    redirect_to wiki_like_path(@article)
   end
   
   # The title of the article in the url is slightly different of the database one, so do some encoding here

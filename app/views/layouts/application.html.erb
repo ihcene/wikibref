@@ -29,7 +29,12 @@
     
         <div>
           <div class="why-not">
-            Pourquoi pas ? <span><%= link_to 'Pink Floyd', wiki_like_path(:slug => 'Pink_Floyd') %>, <%= link_to 'Wikibref', wiki_like_path(:slug => 'Wikibref') %></span>
+            Pourquoi pas ? 
+            <span>
+              <% Article.last(2).each do |a| %>
+                <%= link_to a.title, wiki_like_path(:slug => a.slug) %>,
+              <% end %>
+            </span>
           </div>
           <%= f.text_field :keywords %>
           <input type="image" src="<%= image_path('common/search/icon.png') %>" value="Trouver &rarr;" />
