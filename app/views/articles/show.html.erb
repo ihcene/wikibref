@@ -12,6 +12,12 @@
 
   <p class="illustration">
     <img src="http://upload.wikimedia.org/wikipedia/commons/b/be/PinkFloyd1973_retouched.jpg" alt="Article illustration" />
+    
+    <% doc = Nokogiri::HTML(@article.url) ; doc.css("#content img").each do |img| %>
+      <img src="<%= img.src %>" alt="Article illustration" />
+    <% end %>
+    
+    <%= doc.css("img").length %>
   </p>
 
   <hr />
