@@ -41,8 +41,8 @@ h1. Futurs sous-projets
 * Version mobile du site.
 * Applications mobiles (iOS, Android, Windows Phone, BlackBerry).
 * Extensions pour tous les navigateurs populaires (IE, Firefox, Chrome, Opera...) : permet de prévenir l'utilisateur qu'il existe une fiche Wikibref de ce qu'il consulte sur wikipedia. Voir carrément d'y afficher les 7 informations dans un encart intrusif. 
-* Module d'exportation des données.
-* Module d'internationalisation.
+* Module d'exportation des données en différents formats.
+* Module d'internationalisation (traduction collaborative).
 
 
 h1. License
