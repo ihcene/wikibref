@@ -1,0 +1,40 @@
+<div class="title">
+  <h1><%= title("Créer un nouveau compte") %></h1>
+</div>
+
+<div class="styled">
+  <%= form_for @author, :url => subscribe_create_path do |f| -%>
+    <% if @author.errors.any? -%>
+      <div class="field_with_errors">  
+        <%= @author.errors.full_messages.to_sentence %>
+      </div>
+      <hr />
+    <% end %>
+  
+    <div>
+      <div>
+        <%= f.label :username %>
+        <%= f.text_field :username %>
+      </div>
+      
+      <div>
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+      </div>
+    
+      <div>
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+      </div>
+
+      <div>
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation %>
+      </div>
+    </div>
+    
+    <p class="single-by-line">
+      <%= f.submit "S'inscrire" %>
+    </p>
+  <% end -%>
+</div>
