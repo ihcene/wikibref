@@ -85,7 +85,13 @@
 				border: 2px solid #E1E1E1;
 				
 				img{
+					opacity: 1;
 					max-height: 100px;
+					
+					&:hover{
+						opacity: .3;
+						@include transition(opacity 2s);
+					}
 				}
 			}	
 				
@@ -94,10 +100,6 @@
 				
 				left: 5px;
 				right: 5px;
-			}
-			
-			:checked + label{
-				display: none;
 			}
 		}
 	}
