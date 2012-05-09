@@ -8,7 +8,7 @@ class Article < ActiveRecord::Base
       begin
         open record.url, :proxy => true
       rescue
-        record.errors[:url] << 'Page Wikipedia inexistante'
+        record.errors[:url] << 'proxyage Wikipedia inexistante'
       end
     end
   end
@@ -40,7 +40,7 @@ class Article < ActiveRecord::Base
     arg.match WikiExistenceValidator::VALID_WIKIPEDIA_LINK
     
     self.lang_code = $1
-    self.title = ArticlesController::SlugNormalizer.decode($2)
+    self.title = AppTools::SlugNormalizer.decode($2)
     self.images = extract_images
   end
   
@@ -53,7 +53,7 @@ class Article < ActiveRecord::Base
   end
   
   def slug
-    ArticlesController::SlugNormalizer.encode(title)
+    AppTools::SlugNormalizer.encode(title)
   end
   
   def image

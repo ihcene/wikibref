@@ -26,11 +26,15 @@ end
 
 group :test, :development do
   gem 'guard'
-  gem 'minitest-rails'
   gem "growl"
-  # gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   
-  gem 'guard-minitest'
+  gem 'rspec-rails'
+  gem "webrat"
+  gem "spork-rails"
+  gem "capybara"
+  
+  gem 'guard-rspec'
 end
 
 gem 'jquery-rails'

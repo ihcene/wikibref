@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   def show
-    slug_to_title = SlugNormalizer.decode(params[:slug])
+    slug_to_title = AppTools::SlugNormalizer.decode(params[:slug])
     
     @article = Article.where(:title => slug_to_title).includes(:informations).first
     
@@ -19,7 +19,7 @@ class ArticlesController < ApplicationController
   
   def create
     @article = Article.new(params[:article])
-    @article.creator = user
+    @article.creator = user 
     
     if @article.save
       redirect_to edit_article_path(@article)
@@ -45,20 +45,5 @@ class ArticlesController < ApplicationController
     @article.reload_pictures
     
     redirect_to edit_article_url(@article)
-  end
-  
-  # The title of the article in the url is slightly different of the database one, so do some encoding here
-  class SlugNormalizer
-    def self.decode(slug)
-      slug ||= ""
-      slug = URI.decode(slug)
-      slug.gsub('_', ' ')
-    end
-    
-    def self.encode(title)
-      title ||= ""
-      title = URI.encode(title)
-      title.gsub(' ', '_')
-    end
   end
 end
