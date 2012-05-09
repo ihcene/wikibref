@@ -2,7 +2,7 @@
 
 <%= form_for Author.new, :url => login_user_path do |f| -%>
   <div>
-    <h3>Identification...</h3>
+    <h3>Identification... <%= link_to "Créer un compte", subscribe_url %></h3>
     
     <div>
       <%= f.label :email %>

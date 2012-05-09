@@ -26,12 +26,11 @@
     <h2>Moteur de recherche</h2>
   
       <%= form_for Search.new(params[:search]), :url => search_path, :html => {:method => :get, :id => "search"} do |f| -%>
-    
         <div>
           <div class="why-not">
             Pourquoi pas ? 
             <span>
-              <% Article.last(2).each do |a| %>
+              <% Article.last(2).reverse.each do |a| %>
                 <%= link_to a.title, wiki_like_path(:slug => a.slug) %>,
               <% end %>
             </span>
@@ -52,19 +51,19 @@
   
     <h2>Messages</h2>
     
-    <ol id="notices">
-    <% for name in [:notice, :alert] %>
-      <% if flash[name] %>
-        <li class="<%= name %> closable">
-          <div>
-            <h3><%= name.capitalize %></h3>
-            <%= flash[name] %>
-          </div>
-          <a href="#close" class="close"><%= image_tag 'common/close.png' %></a>
-        </li>
+      <ol id="notices">
+      <% for name in [:notice, :alert] %>
+        <% if flash[name] %>
+          <li class="<%= name %> closable">
+            <div>
+              <h3><%= name.capitalize %></h3>
+              <%= flash[name] %>
+            </div>
+            <a href="#close" class="close"><%= image_tag 'common/close.png' %></a>
+          </li>
+        <% end -%>
       <% end -%>
-    <% end -%>
-    </ol>
+      </ol>
   </header>
   
   <div id="content">

@@ -218,5 +218,10 @@ fr:
     errors:
       <<: *errors
   activerecord:
+    attributes:
+      author:
+        username: "Nom d'utilisateur"
+        password: "Mot de passe"
+        password_confirmation: "Confirmer"
     errors:
       <<: *errors

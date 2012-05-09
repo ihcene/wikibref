@@ -19,6 +19,7 @@ class ArticlesController < ApplicationController
   
   def create
     @article = Article.new(params[:article])
+    @article.creator = user
     
     if @article.save
       redirect_to edit_article_path(@article)
@@ -30,12 +31,20 @@ class ArticlesController < ApplicationController
   
   def update
     @article = Article.find(params[:id])
+    @article.last_modifier = user
 
     @article.update_attributes params[:article]
     
     flash[:notice] = t(".update.article_successfully_edited");
     
     redirect_to wiki_like_path(:slug => @article.slug)
+  end
+  
+  def reload_pictures
+    @article = Article.find(params[:id])
+    @article.reload_pictures
+    
+    redirect_to edit_article_url(@article)
   end
   
   # The title of the article in the url is slightly different of the database one, so do some encoding here

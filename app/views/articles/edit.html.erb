@@ -1,5 +1,9 @@
 <div class="title">
-  <h1><%= title("[Édition] " + @article.title) %></h1>
+  <h1><%= title("[Modifier] " + content_tag(:em) { sanitize(@article.title) }).html_safe %></h1>
+
+  <p class="links">
+    <%= link_to "Historique des modifications", history_article_path(@article) %>
+  </p>
 </div>
 
 <div class="styled">
@@ -8,13 +12,20 @@
     <%= f.fields_for :main_information, (@article.main_information || Information.new) do |subform| %>
       <%= subform.text_area :content, :placeholder => "Entrez-ici une définition courte qui introduit au mieux le sujet en question" %>
     <% end %>
-    
-    <div class="single-by-line"><%= f.submit %></div>
   </p>
 
-  <p class="illustration">
-    <img src="http://upload.wikimedia.org/wikipedia/commons/b/be/PinkFloyd1973_retouched.jpg" alt="Article illustration" />
-  </p>
+  <strong>Choisissez l'image qui décrit au mieux l'article :</strong>
+  <div class="illustration edition">
+    <ul>
+    <% @article.images.each_with_index do |img, i| %>
+      <li><label for="img<%= i %>"><img src="<%= img[:src] %>" /></label><%= f.radio_button :image_uri, img[:src], {:id => "img" + i.to_s} %></li>
+    <% end if @article.images && @article.images.count > 0 %>
+    </ul>
+    
+    <div class="single-by-line"><small><%= link_to "Recharger la liste des images à partir de l'article Wikipedia", reload_pictures_article_url(@article) %></small></div>
+  </div>
+
+  <p class="single-by-line"><%= f.submit "Enregistrer" %></p>
 
   <hr />
 
@@ -36,6 +47,9 @@
               <% end -%>
               <%= link_to article_information_url(@article, information), :remote => true, :method => :delete, :class => "delete", :confirm => "Êtes-vous sûrs de vouloir supprimer cette information ?" do %>
                 <%= image_tag asset_path('icons/delete.png') %>
+              <% end -%>
+              <%= link_to history_article_information_url(@article, information), :class => "history" do %>
+                <%= image_tag asset_path('icons/history.png') %>
               <% end -%>
             </span>
             <%= raw bold_keywords(information.content) %>

@@ -2,21 +2,18 @@ class Information < ActiveRecord::Base
   attr_accessible :article, :content, :link_for_details, :score, :is_main
   
   belongs_to  :article
+  belongs_to  :last_revision_author, :class_name => "Author"
+  
   has_many    :versions, :class_name => "InformationVersion"
   
   before_save :create_history, :on => :update
+  # before_save :assign_user
   
   self.table_name = "informations"
   
   default_scope where(:deleted => false)
   
-  validates_presence_of :content
-  
-  def create_history
-    if self.content_changed? && (interval_between_versions_passed? || change_by_other_user?)
-      InformationVersion.create(:content => self.content_was, :until => DateTime.now, :information => self)
-    end
-  end
+  validates :content, :presence => true, :length => { :in => 10..255 }
   
   def destroy
     self.deleted = true
@@ -30,5 +27,20 @@ class Information < ActiveRecord::Base
   
     def change_by_other_user?
       false
+    end
+    
+    def create_history
+      if self.content_changed? && (interval_between_versions_passed? || change_by_other_user?)
+        InformationVersion.create(
+          :content => self.content_was, 
+          :until => DateTime.now, 
+          :information => self, 
+          :author => last_revision_author
+        )
+      end
+    end
+    
+    def assign_user
+      # self.last_revision_author = article.last_modifier
     end
 end

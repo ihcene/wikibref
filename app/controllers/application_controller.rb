@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   
   def user
     @user ||= 
-      Author.where(:id => session[:user_id]).first if session[:user_id]
+      Author.where(:id => session[:author_id]).first if session[:author_id]
   end
   
   alias :current_user :user

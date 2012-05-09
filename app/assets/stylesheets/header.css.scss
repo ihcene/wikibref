@@ -31,8 +31,12 @@ header{
 		a {
 			position: relative;
 			
+			opacity: 1;
+			@include transition(opacity 2.0s);
+			
 			&:hover {
 				img{
+					@include transition(opacity 2.0s);
 					opacity: .3;	
 				}
 				
@@ -108,13 +112,32 @@ header{
 		}
 		
 		h3{
-			margin-top: 10px;
-			margin-bottom: 15px;
+			margin:{
+				top: 10px;
+				bottom: 15px;
+			}
+			
 			font-size: 130%;
 		}
 	
 		form{
 			display: none;
+		
+			position: absolute;
+			left: 300px;
+			width: 350px;
+		
+			background:{
+				image: image-url('users/login-corner-icon.png'), -moz-linear-gradient(top,  #f2f3f1,  #f4f4f4, transparentize(#ffffff, .2));
+				image: image-url('users/login-corner-icon.png'), -webkit-linear-gradient(top,  #f2f3f1,  #f4f4f4, transparentize(#ffffff, .2));
+		
+				position: 100% 0%;
+				repeat: no-repeat;
+			};
+			
+			@include box-shadow(0px 0px 15px #BBBBBB);
+			
+			@include border-radius($defaultradius / 2);
 		
 			&>div{
 				padding: 10px;
@@ -125,7 +148,7 @@ header{
 				}
 			}
 		
-			a{
+			a.js{
 				position: absolute;
 				bottom: -20px;
 				right: -15px;
@@ -142,22 +165,6 @@ header{
 			input[type=text], input[type=password]{
 				width: 160px;
 			}
-		
-			position: absolute;
-			left: 300px;
-			width: 350px;
-		
-			background-image: image-url('users/login-corner-icon.png'), -moz-linear-gradient(top,  #f2f3f1,  #f4f4f4, transparentize(#ffffff, .2));
-			background-image: image-url('users/login-corner-icon.png'), -webkit-linear-gradient(top,  #f2f3f1,  #f4f4f4, transparentize(#ffffff, .2));
-		
-			background-position: 100% 0%;
-			background-repeat: no-repeat;
-		
-			
-			
-			@include box-shadow(0px 0px 15px #BBBBBB);
-			
-			@include border-radius($defaultradius / 2);
 		}
 	}
 
@@ -192,7 +199,7 @@ header{
 
 			&>a{
 				position: absolute;
-				bottom: 0px;
+				bottom: 10px;
 				right: 0px;
 			}
 		
@@ -255,14 +262,16 @@ header{
 			font-weight: bold;
 			padding-left: 3px;
 			line-height: 23px;
+			
+			white-space: nowrap;
 	
 			span{
 				font-weight: normal;
 				padding-left: 5px;
-			}
-	
-			span:after{
-				content: (' ...');
+				
+				&:after{
+					content: (' ...');
+				}
 			}
 		}
 	

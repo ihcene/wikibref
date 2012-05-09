@@ -1,7 +1,7 @@
 module ApplicationHelper
   def title(titre)
     content_for(:title) do 
-      titre
+      strip_tags titre
     end
     titre
   end

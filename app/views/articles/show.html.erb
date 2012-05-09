@@ -10,15 +10,11 @@
 <div>
   <p class="information main"><%= raw bold_keywords(@article.main_information.try(:content)) %></p>
 
+  <%- if @article.image -%>
   <p class="illustration">
-    <img src="http://upload.wikimedia.org/wikipedia/commons/b/be/PinkFloyd1973_retouched.jpg" alt="Article illustration" />
-    
-    <% doc = Nokogiri::HTML(@article.url) ; doc.css("#content img").each do |img| %>
-      <img src="<%= img.src %>" alt="Article illustration" />
-    <% end %>
-    
-    <%= doc.css("img").length %>
+    <a href="<%= @article.image_fullsize %>"><img src="<%= @article.image %>" alt="Illustration" /></a>
   </p>
+  <%- end -%>
 
   <hr />
 
