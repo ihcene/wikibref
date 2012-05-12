@@ -31,7 +31,7 @@
             Pourquoi pas ? 
             <span>
               <% Article.last(2).reverse.each do |a| %>
-                <%= link_to a.title, wiki_like_path(:slug => a.slug) %>,
+                <%= link_to a.title, wiki_like_url(:slug => a.slug) %>,
               <% end %>
             </span>
           </div>

@@ -9,8 +9,8 @@ module AppTools
   
     def self.encode(title)
       title ||= ""
-      title = URI.encode(title)
-      title.gsub(' ', '_')
+      title = title.gsub(' ', '_')
+      URI.encode(title)
     end
   end
 end

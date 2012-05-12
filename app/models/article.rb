@@ -1,21 +1,17 @@
 class Article < ActiveRecord::Base
   class WikiExistenceValidator < ActiveModel::Validator
-    require 'open-uri'
-    
     VALID_WIKIPEDIA_LINK = %r{(?:http://)?([^\.]+)\.wikipedia\.org/wiki/(.+)}
     
     def validate(record)
-      begin
-        open record.url, :proxy => true
-      rescue
-        record.errors[:url] << 'proxyage Wikipedia inexistante'
+      unless record.lang_code? && record.title?
+        record.errors[:url] << 'page Wikipedia inexistante'
       end
     end
   end
   
   attr_accessible :url, :informations_attributes, :main_information, :main_information_attributes, :image_uri
   
-  validates_format_of :url, :with => WikiExistenceValidator::VALID_WIKIPEDIA_LINK, :on => :create
+  # validates_format_of :url, :with => WikiExistenceValidator::VALID_WIKIPEDIA_LINK, :on => :create
   validates_with WikiExistenceValidator, :on => :create, :if => proc {|a| a['title'] != 'Wikibref'}
   
   validates_uniqueness_of :title, :scope => :lang_code
@@ -26,8 +22,6 @@ class Article < ActiveRecord::Base
   belongs_to :creator, :class_name => "Author"
   belongs_to :last_modifier, :class_name => "Author"
   
-  before_validation :prefix_url, :on => :create
-  
   accepts_nested_attributes_for :informations, :reject_if => proc {|a| a['content'].blank?}
   accepts_nested_attributes_for :main_information, :reject_if => proc {|a| a['content'].blank?}
   
@@ -36,12 +30,15 @@ class Article < ActiveRecord::Base
   attr_accessor :user
   
   def url=(arg)
-    @url = arg
-    arg.match WikiExistenceValidator::VALID_WIKIPEDIA_LINK
+    @url = prefix_url_if_necessary(arg)
     
-    self.lang_code = $1
-    self.title = AppTools::SlugNormalizer.decode($2)
-    self.images = extract_images
+    if @url.match WikiExistenceValidator::VALID_WIKIPEDIA_LINK
+      self.lang_code = $1
+      self.title = AppTools::SlugNormalizer.decode($2)
+      self.images = extract_images
+    else
+      errors[:url] << 'page Wikipedia inexistante'
+    end
   end
   
   def url
@@ -73,12 +70,16 @@ class Article < ActiveRecord::Base
   end
   
   private
-    def prefix_url
-      self.url = "http://" + self.url unless self.url.starts_with? "http://"
+    def prefix_url_if_necessary(url)
+      if url.starts_with? "http://"
+        url
+      else
+        "http://" + url
+      end
     end
 
     def extract_images
-      doc = Nokogiri::HTML(open(url)) ;
+      doc = Nokogiri::HTML grab_original_url_content;
 
       imgs = []
 
@@ -89,5 +90,9 @@ class Article < ActiveRecord::Base
       end
       
       imgs.uniq
+    end
+    
+    def grab_original_url_content
+      open(url)
     end
 end

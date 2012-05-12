@@ -25,16 +25,16 @@ group :assets do
 end
 
 group :test, :development do
-  gem 'guard'
   gem "growl"
   gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   
   gem 'rspec-rails'
   gem "webrat"
-  gem "spork-rails"
   gem "capybara"
   
+  gem 'guard'
   gem 'guard-rspec'
+  gem 'guard-spork'
 end
 
 gem 'jquery-rails'
