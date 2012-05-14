@@ -1,4 +1,6 @@
 class Article < ActiveRecord::Base
+  require 'open-uri'
+  
   class WikiExistenceValidator < ActiveModel::Validator
     VALID_WIKIPEDIA_LINK = %r{(?:http://)?([^\.]+)\.wikipedia\.org/wiki/(.+)}
     
@@ -18,6 +20,7 @@ class Article < ActiveRecord::Base
   
   has_many  :informations, :conditions => {:is_main => false}, :order => 'score ASC'
   has_one   :main_information, :class_name => "Information", :conditions => {:is_main => true}
+  has_many  :all_information, :class_name => "Information"
   
   belongs_to :creator, :class_name => "Author"
   belongs_to :last_modifier, :class_name => "Author"
@@ -69,6 +72,28 @@ class Article < ActiveRecord::Base
     save    
   end
   
+  def last_modifier=(user)
+    super
+    tell_informations_about_last_modifer
+  end
+  
+  def history
+    updates = []
+    
+    # Creation
+    updates << {
+      :type   => :creation,
+      :date   => self.created_at
+    }
+    
+    # Informations
+    self.all_information.includes(:versions).each do |info|
+      updates = updates + info.history
+    end
+    
+    updates
+  end
+  
   private
     def prefix_url_if_necessary(url)
       if url.starts_with? "http://"
@@ -94,5 +119,10 @@ class Article < ActiveRecord::Base
     
     def grab_original_url_content
       open(url)
+    end
+    
+    def tell_informations_about_last_modifer
+      informations.each{ |info| info.last_revision_author = last_modifier if info.changed? || info.new_record? }
+      main_information.last_revision_author = last_modifier if main_information && (main_information.changed? || main_information.new_record?)
     end
 end

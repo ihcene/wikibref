@@ -9,4 +9,8 @@ class InformationsController < ApplicationController
       end
     end
   end
+  
+  def history
+    @information = Article.find(params[:article_id]).informations.find(params[:id])
+  end
 end

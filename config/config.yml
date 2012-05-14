@@ -2,3 +2,6 @@ count_info: 7
 keywords_allowed_by_information: 2
 interval_between_versions: 5
 minimal_image_s_height_acceptable: 30 
+informations:
+  min_length: 10
+  max_length: 255

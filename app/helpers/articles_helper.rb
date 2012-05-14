@@ -18,4 +18,8 @@ module ArticlesHelper
     options[:value] = position unless position.nil?
     options 
   end
+  
+  def sort arr
+    arr.sort{ |a, b| b[:date] <=> a[:date] }
+  end
 end

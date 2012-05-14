@@ -164,11 +164,19 @@
 	}
 }
 
-#content ol{
+#content .edit_or_show ol{
 	margin-left: 15px;
 	
 	&.sortable{
 		li{
+			&:nth-child(n+8){
+				.content{
+					&:hover{
+						padding-left: 90px;	
+					}
+				}
+			}
+			
 			.content{
 				cursor: move;	
 				
@@ -296,11 +304,6 @@
 				.content{
 					height: 50px;
 					color: lighten(black, 70%);
-					
-
-					&:hover{
-						padding-left: 90px;	
-					}
 				}
 				
 				.tools{
@@ -315,6 +318,19 @@
 			/* Aesthetic border */
 			&:nth-child(7){
 				border-bottom: 1px solid #E1E1E1;
+			}
+		}
+	}
+}
+
+
+.history{
+	ol{
+		li{
+			margin-bottom: 15px;
+			
+			.infos{
+				margin-bottom: 5px;
 			}
 		}
 	}

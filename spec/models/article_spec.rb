@@ -51,4 +51,59 @@ describe Article do
       pending "should avoid images smaller than X pixels height"
     end
   end
+  
+  context "Edit informations" do
+    before(:each) do 
+      # Create the user 
+      @author = Author.create(
+        :username               => "Toto", 
+        :email                  => "toto@tata.lu", 
+        :password               => "1234", 
+        :password_confirmation  => "1234"
+      );
+      
+      # Create the article
+      @article = Article.new
+      @article.stub(:extract_images).and_return([])
+      @article.url = "http://en.wikipedia.org/wiki/Algeria"
+      
+      @article.creator = @author
+      
+      @article.save
+    end
+    
+    it "should create correctly the user and article" do
+      @author.should_not be :new_record
+      @article.should_not be :new_record
+    end
+    
+    it "should correcty surcharge the reading accessor of last_modifier" do 
+      @article.last_modifier = @author
+      @article.last_modifier.should eq(@author)
+    end
+    
+    context "transfert user to informations" do 
+      before(:each) do 
+        @article.attributes = {
+          :main_information_attributes => {:content => "Is a north african country"},
+          :informations_attributes => {
+            "0" => {
+              :content => "Is a north african country"
+            }
+          }
+        }
+      
+        @article.last_modifier = @author  
+      end
+      
+      it "should transfert to main_information" do
+        @article.main_information.last_revision_author.should eq(@author)
+      end
+
+      it "should transfert to other informations created" do
+        @article.should have(1).informations
+        @article.informations.first.last_revision_author.should == @author  
+      end
+    end
+  end
 end

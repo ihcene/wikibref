@@ -1,12 +1,12 @@
 <div class="title">
-  <h1><%= title("[Modifier] " + content_tag(:em) { sanitize(@article.title) }).html_safe %></h1>
+  <h1><%= title("[Modifier] " + content_tag(:em) { sanitize(link_to @article.title, wiki_like_path(@article.slug)) }).html_safe %></h1>
 
   <p class="links">
     <%= link_to "Historique des modifications", history_article_path(@article) %>
   </p>
 </div>
 
-<div class="styled">
+<div class="styled edit_or_show">
   <%= form_for @article do |f| %>
   <p class="information main">
     <%= f.fields_for :main_information, (@article.main_information || Information.new) do |subform| %>

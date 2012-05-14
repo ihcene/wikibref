@@ -31,13 +31,20 @@ class ArticlesController < ApplicationController
   
   def update
     @article = Article.find(params[:id])
+    
+    @article.attributes = params[:article]
     @article.last_modifier = user
-
-    @article.update_attributes params[:article]
     
-    flash[:notice] = t(".update.article_successfully_edited");
-    
-    redirect_to wiki_like_path(:slug => @article.slug)
+    if @article.save
+      flash[:notice] = t(".update.article_successfully_edited");
+      redirect_to wiki_like_path(:slug => @article.slug)
+    else
+      
+    end
+  end
+  
+  def history
+    @article = Article.find params[:id]
   end
   
   def reload_pictures

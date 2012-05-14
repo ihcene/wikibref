@@ -1,17 +1,17 @@
 <div class="title">
-  <h1><%= title("Historique des modifications") %></h1>
+  <h1><%= title("[Historique] " + sanitize(content_tag(:em){ excerpt(@information.content, "", :radius => 35) })).html_safe %></h1>
   
   <p class="links">
-    <%= link_to "&larr; Revenir à l'édition de l'article".html_safe, edit_article_path(@article) %>
+    <%= link_to "&larr; Revenir à l'édition de l'article".html_safe, edit_article_path(@information.article) %>
   </p>
 </div>
 
 <div class="history">
   <ol>
-    <%- sort(@article.history).each do |maj| -%>
+    <%- sort(@information.history).each do |maj| -%>
       <li class="<%= maj[:type].to_s %>">
         <div class="infos">
-          <strong class="type"><%= {:creation => "Création", :info_created => "Info. ajoutée", :info_updated => "Info. modifiée"}[maj[:type]] %></strong> 
+          <strong class="type"><%= {:creation => "Création", :info_created => "Création", :info_updated => "Modification"}[maj[:type]] %></strong> 
           le <datetime><%= l(maj[:date]) %></datetime> 
           par <span class="user"><%= maj[:author].try(:username).or "Anonyme" %></span>
         </div>
