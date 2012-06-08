@@ -22,13 +22,17 @@
 .links{
 	text-align: center;
 	
-	a{
+	a.styled{
 		text-decoration: none;
 		@include button;
 		
 		&.edit{
 			@include button(red);
 		}
+	}
+	
+	img{
+		vertical-align: middle;
 	}
 }
 
@@ -160,6 +164,21 @@
 			font-family: $georgia;
 		
 			font-size: 16px;
+		}
+	}
+	
+	.counter{
+		float: right;
+		background-color: $green;
+		color: white;
+		
+		padding: 2px;
+		@include border-radius(2px);
+		
+		font-size: 13px;
+		
+		&.overflow{
+			background-color: $red;
 		}
 	}
 }

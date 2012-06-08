@@ -5,6 +5,9 @@
 
   <%= f.fields_for :informations, information do |f_i| %>
     <%= f_i.hidden_field :score, options(information, position) %>
+    <%= content_tag :div, :class => "error_messages",  do %>
+      <%= f_i.object.errors.full_messages.to_sentence %>
+    <% end if f_i.object.errors.count > 0 %>
     <div><%= f_i.text_area :content, :placeholder => "[Entrez ici une information courte et pertinente]" %></div>
     <div>
       <%= f_i.text_field :link_for_details, :placeholder => "Lien vers la section de l'article Wikipédia original ou vers un article dédié" %>

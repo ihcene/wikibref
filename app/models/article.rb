@@ -13,7 +13,6 @@ class Article < ActiveRecord::Base
   
   attr_accessible :url, :informations_attributes, :main_information, :main_information_attributes, :image_uri
   
-  # validates_format_of :url, :with => WikiExistenceValidator::VALID_WIKIPEDIA_LINK, :on => :create
   validates_with WikiExistenceValidator, :on => :create, :if => proc {|a| a['title'] != 'Wikibref'}
   
   validates_uniqueness_of :title, :scope => :lang_code
@@ -34,11 +33,17 @@ class Article < ActiveRecord::Base
   
   def url=(arg)
     @url = prefix_url_if_necessary(arg)
+    @url = encode_url_if_necessary(@url)
     
     if @url.match WikiExistenceValidator::VALID_WIKIPEDIA_LINK
-      self.lang_code = $1
-      self.title = AppTools::SlugNormalizer.decode($2)
-      self.images = extract_images
+      begin
+        page = Nokogiri::HTML(grab_original_url_content)
+        self.images = extract_images(page)
+        self.lang_code = $1
+        self.title = AppTools::SlugNormalizer.decode($2)
+      rescue Exception => e
+        errors[:url] << 'page Wikipedia incorrecte ou inexistante'
+      end
     else
       errors[:url] << 'page Wikipedia inexistante'
     end
@@ -102,10 +107,17 @@ class Article < ActiveRecord::Base
         "http://" + url
       end
     end
+    
+    def encode_url_if_necessary(url)
+      begin
+        url.encode("US-ASCII")
+        url
+      rescue   
+        URI.encode(url)
+      end
+    end
 
-    def extract_images
-      doc = Nokogiri::HTML grab_original_url_content;
-
+    def extract_images(doc)
       imgs = []
 
       doc.css("#content img").each do |img|

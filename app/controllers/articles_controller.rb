@@ -39,7 +39,8 @@ class ArticlesController < ApplicationController
       flash[:notice] = t(".update.article_successfully_edited");
       redirect_to wiki_like_path(:slug => @article.slug)
     else
-      
+      flash.now[:alert] = t(".create.errors");
+      render :action => "edit"
     end
   end
   

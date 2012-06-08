@@ -13,6 +13,7 @@ class Information < ActiveRecord::Base
   default_scope where(:deleted => false)
   
   validates :content, :presence => true, :length => { :in => APP_CONFIG['informations']['min_length']..APP_CONFIG['informations']['max_length'] }
+  validates_uniqueness_of :content, :scope => :article_id
   
   def destroy
     self.deleted = true

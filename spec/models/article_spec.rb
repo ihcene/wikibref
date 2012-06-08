@@ -5,7 +5,7 @@ require 'spec_helper'
 describe Article do
   before :each do 
     @article = Article.new
-    @article.stub(:extract_images).and_return([])  
+    @article.stub(:grab_original_url_content).and_return("")  
   end
   
   it "should validate Wiki links" do
@@ -20,12 +20,34 @@ describe Article do
     @article.should have(1).errors_on(:url)
   end
   
+  context "URI validity" do 
+    it "should prefix URI with protocol" do
+      @article.send(:prefix_url_if_necessary, "fr.wikipedia.org/wiki/France").should eq("http://fr.wikipedia.org/wiki/France")
+    end
+    
+    it "should not prefix while not necessary" do
+      @article.send(:prefix_url_if_necessary, "http://fr.wikipedia.org/wiki/France").should_not eq("http://http://fr.wikipedia.org/wiki/France")
+    end
+    
+    it "should encode URI if necessary" do
+      @article.send(:encode_url_if_necessary, "http://fr.wikipedia.org/wiki/Algérie").should eq("http://fr.wikipedia.org/wiki/Alg%C3%A9rie")
+    end
+
+    it "should encode really messy complexe URI" do
+      @article.send(:encode_url_if_necessary, "http://ar.wikipedia.org/wiki/الحديث_النبوي").should eq("http://ar.wikipedia.org/wiki/%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB_%D8%A7%D9%84%D9%86%D8%A8%D9%88%D9%8A")
+    end
+
+    it "should not encode valid correctly encoded strings" do
+      @article.send(:encode_url_if_necessary, "http://fr.wikipedia.org/wiki/Alg%C3%A9rie").should eq("http://fr.wikipedia.org/wiki/Alg%C3%A9rie")
+    end
+  end
+  
   context "with valid Wiki path" do
     before(:each) do
       @original_url = "http://fr.wikipedia.org/wiki/Alg%C3%A9rie"
       
       @article = Article.new
-      @article.stub(:extract_images).and_return([])
+      @article.stub(:grab_original_url_content).and_return("")
       @article.url = @original_url
     end
     
@@ -64,7 +86,7 @@ describe Article do
       
       # Create the article
       @article = Article.new
-      @article.stub(:extract_images).and_return([])
+      @article.stub(:grab_original_url_content).and_return("")
       @article.url = "http://en.wikipedia.org/wiki/Algeria"
       
       @article.creator = @author

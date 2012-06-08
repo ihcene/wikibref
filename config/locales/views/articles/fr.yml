@@ -2,4 +2,9 @@ fr:
   update:
     article_successfully_edited: "Article édité avec succès"
   create:
-    errors: "Des erreurs se sont glissés dans votre formulaire"
+    errors: "Des erreurs se sont glissées dans votre formulaire"
+  history:
+    labels:
+      creation: "Création"
+      info_created: "Info. ajoutée"
+      info_updated: "Info. modifiée"

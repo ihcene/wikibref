@@ -137,7 +137,7 @@ header{
 			
 			@include box-shadow(0px 0px 15px #BBBBBB);
 			
-			@include border-radius($defaultradius / 2);
+			@include border-radius($defaultradius/2);
 		
 			&>div{
 				padding: 10px;
@@ -178,15 +178,13 @@ header{
 	
 		li.alert{
 			div{
-				background-image: image-url('common/flash/alert.png'), -moz-linear-gradient(top,  #f2f3f1,  #f4f4f4, transparentize(#ffffff, .1));
-				background-image: image-url('common/flash/alert.png'), -webkit-linear-gradient(top,  #f2f3f1,  #f4f4f4, transparentize(#ffffff, .1));
+				@include background-image(image-url('common/flash/alert.png'), linear-gradient(top,  #f2f3f1,  #f4f4f4, transparentize(#ffffff, .1)));
 			}
 		}
 
 		li.notice{
 			div{
-				background-image: image-url('common/flash/notice.png'), -moz-linear-gradient(top,  #f2f3f1,  #f4f4f4, transparentize(#ffffff, .1));
-				background-image: image-url('common/flash/notice.png'), -webkit-linear-gradient(top,  #f2f3f1,  #f4f4f4, transparentize(#ffffff, .1));
+				@include background-image(image-url('common/flash/notice.png'), linear-gradient(top,  #f2f3f1,  #f4f4f4, transparentize(#ffffff, .1)));
 			}
 		}
 	

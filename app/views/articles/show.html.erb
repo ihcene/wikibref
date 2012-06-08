@@ -1,9 +1,9 @@
 <div class="title">
-  <h1><%= title(@article.title) %></h1>
+  <h1><%= title(@article.title) if @article.title != "Wikibref" %></h1>
 
   <p class="links">
-    <%= link_to "Modifier", edit_article_path(@article), :class => "edit" %>
-    <%= link_to "Article détaillé sur Wikipédia &rarr;".html_safe, @article.url_original %>
+    <%= link_to "Modifier", edit_article_path(@article), :class => "styled edit" %>
+    <%= link_to "Article détaillé sur Wikipédia &rarr;".html_safe, @article.url_original, :class => "styled" %>
   </p>
 </div>
 
@@ -33,7 +33,7 @@
     <%- end -%>
   
     <p class="links other_informations">
-      <%= link_to "+ Plus d'informations" %>
+      <%= link_to "+ Plus d'informations", {}, :class => "styled" %>
     </p>
 
   </ol>

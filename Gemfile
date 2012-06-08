@@ -26,7 +26,7 @@ end
 
 group :test, :development do
   gem "growl"
-  # gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   
   gem 'rspec-rails'
   gem "webrat"

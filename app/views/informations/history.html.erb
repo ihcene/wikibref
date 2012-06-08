@@ -2,7 +2,7 @@
   <h1><%= title("[Historique] " + sanitize(content_tag(:em){ excerpt(@information.content, "", :radius => 35) })).html_safe %></h1>
   
   <p class="links">
-    <%= link_to "&larr; Revenir à l'édition de l'article".html_safe, edit_article_path(@information.article) %>
+    <%= link_to "&larr; Historique de l'article entier".html_safe, history_article_path(@information.article), :class => "styled" %>
   </p>
 </div>
 

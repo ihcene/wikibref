@@ -1,0 +1,14 @@
+<div class="infos">
+  <strong class="type"><%= t("history.labels.#{maj[:type]}") %></strong> 
+  le <datetime><%= l(maj[:date]) %></datetime> 
+  par <span class="user"><%= maj[:author].try(:username).or "Anonyme" %></span>
+</div>
+<%- if maj[:type] == :info_created -%>
+  <div class="diff">
+    <ul>
+      <li class="ins"><ins><%= maj[:content] %></ins></li>
+    </ul>
+  </div>
+<%- elsif maj[:type] == :info_updated -%>
+  <div><%= Diffy::Diff.new(maj[:content_from], maj[:content_to]).to_s(:html).html_safe %></div>
+<%- end -%>

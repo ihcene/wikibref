@@ -2,7 +2,8 @@
   <h1><%= title("Historique des modifications") %></h1>
   
   <p class="links">
-    <%= link_to "&larr; Revenir à l'édition de l'article".html_safe, edit_article_path(@article) %>
+    <%= link_to image_tag("icons/rss.png"), history_article_path(@article, :format => "rss") %>
+    <%= link_to "&larr; Revenir à l'édition de l'article".html_safe, edit_article_path(@article), :class => "styled" %>
   </p>
 </div>
 
@@ -10,20 +11,7 @@
   <ol>
     <%- sort(@article.history).each do |maj| -%>
       <li class="<%= maj[:type].to_s %>">
-        <div class="infos">
-          <strong class="type"><%= {:creation => "Création", :info_created => "Info. ajoutée", :info_updated => "Info. modifiée"}[maj[:type]] %></strong> 
-          le <datetime><%= l(maj[:date]) %></datetime> 
-          par <span class="user"><%= maj[:author].try(:username).or "Anonyme" %></span>
-        </div>
-        <%- if maj[:type] == :info_created -%>
-          <div class="diff">
-            <ul>
-              <li class="ins"><ins><%= maj[:content] %></ins></li>
-            </ul>
-          </div>
-        <%- elsif maj[:type] == :info_updated -%>
-          <div><%= Diffy::Diff.new(maj[:content_from], maj[:content_to]).to_s(:html).html_safe %></div>
-        <%- end -%>
+        <%= render :partial => 'history', :locals => {:maj => maj} %>
       </li>
     <%- end -%>
   </ol>
